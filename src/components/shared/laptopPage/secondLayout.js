@@ -9,7 +9,6 @@ import {
   RadioGroup,
   Radio,
   Img,
-  Button,
 } from "@chakra-ui/react";
 
 import error from "../../../assets/errorIcon.png";
@@ -157,7 +156,6 @@ function SecondLayout({ formik }) {
           </Text>
         </Box>
         <Box
-          // ml={["0", "16"]}
           display="flex"
           flexDirection="column"
           w={["min('100%', '220px')", "220px"]}

@@ -55,5 +55,4 @@ export default function setCurrentReducer(state = initialState, action) {
     default:
       return state;
   }
-  return state;
 }

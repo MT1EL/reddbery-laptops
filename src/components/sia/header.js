@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 
 import arrow from "../../assets/backIcon.png";
 import circle from "../../assets/backIconCircle.png";

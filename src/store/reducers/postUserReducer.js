@@ -25,5 +25,4 @@ export default function postUserReducer(state = initialState, action) {
     default:
       return state;
   }
-  return state;
 }

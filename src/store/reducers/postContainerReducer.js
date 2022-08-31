@@ -15,5 +15,4 @@ export default function postContainerReducer(state = initialState, action) {
     default:
       return state;
   }
-  return state;
 }

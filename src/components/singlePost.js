@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Image, SimpleGrid, Text, Grid } from "@chakra-ui/react";
+import { Box, Image, SimpleGrid, Text, Grid } from "@chakra-ui/react";
 import store from "../store";
 import SiaHeader from "./sia/header";
 function SinglePost() {

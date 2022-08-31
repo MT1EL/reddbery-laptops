@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Input,
-  Text,
-  Select,
-  Flex,
-  RadioGroup,
-  Radio,
-  Img,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Text, Flex, Img, Button } from "@chakra-ui/react";
 import Header from "./shared/header";
 import logo from "../assets/icon-logo.png";
 
