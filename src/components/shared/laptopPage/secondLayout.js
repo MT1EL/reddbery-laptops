@@ -31,15 +31,15 @@ function SecondLayout({ formik }) {
           fontWeight="500"
           w={["100%", "220px"]}
           my="4"
-          name="cpu"
-          value={formik.values.cpu}
+          name="CPU"
+          value={formik.values.CPU}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           focusBorderColor={
-            formik.touched.cpu && formik.errors.cpu ? "#E52F2F" : "#98c7e6"
+            formik.touched.CPU && formik.errors.CPU ? "#E52F2F" : "#98c7e6"
           }
           borderColor={
-            formik.touched.cpu && formik.errors.cpu ? "#E52F2F" : "#98c7e6"
+            formik.touched.CPU && formik.errors.CPU ? "#E52F2F" : "#98c7e6"
           }
         >
           <option value="Intel Core">Intel Core</option>
@@ -51,7 +51,11 @@ function SecondLayout({ formik }) {
         <Text
           fontWeight="500"
           fontSize="18px"
-          color={formik.touched.cpuCore && formik.errors.cpuCore && "#E52F2F"}
+          color={
+            formik.touched["CPU-ს ბირთვი"] &&
+            formik.errors["CPU-ს ბირთვი"] &&
+            "#E52F2F"
+          }
         >
           CPU-ს ბირთვი
         </Text>
@@ -60,23 +64,29 @@ function SecondLayout({ formik }) {
           placeholder="14"
           w={["100%", "220px"]}
           outlineColor={
-            formik.touched.cpuCore && formik.errors.cpuCore
+            formik.touched["CPU-ს ბირთვი"] && formik.errors["CPU-ს ბირთვი"]
               ? "#E52F2F"
               : "#98c7e6"
           }
           focusBorderColor="transparent"
           border="none"
           my="5px"
-          name="cpuCore"
-          id="cpuCore"
+          name="CPU-ს ბირთვი"
+          id="CPU-ს ბირთვი"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         <Text
           fontSize="14px"
-          color={formik.touched.cpuCore && formik.errors.cpuCore && "#E52F2F"}
+          color={
+            formik.touched["CPU-ს ბირთვი"] &&
+            formik.errors["CPU-ს ბირთვი"] &&
+            "#E52F2F"
+          }
         >
-          {formik.errors.cpuCore ? formik.errors.cpuCore : "მხოლოდ ციფრები"}
+          {formik.errors["CPU-ს ბირთვი"]
+            ? formik.errors["CPU-ს ბირთვი"]
+            : "მხოლოდ ციფრები"}
         </Text>
       </Box>
       <Box w={["100%", "220px"]} mt={["4", "0"]}>
@@ -84,7 +94,9 @@ function SecondLayout({ formik }) {
           fontWeight="500"
           fontSize="18px"
           color={
-            formik.touched.cpuStream && formik.errors.cpuStream && "#E52F2F"
+            formik.touched["CPU-ს ნაკადი"] &&
+            formik.errors["CPU-ს ნაკადი"] &&
+            "#E52F2F"
           }
         >
           CPU-ს ნაკადი
@@ -94,25 +106,29 @@ function SecondLayout({ formik }) {
           placeholder="365"
           w={["100%", "220px"]}
           outlineColor={
-            formik.touched.cpuStream && formik.errors.cpuStream
+            formik.touched["CPU-ს ნაკადი"] && formik.errors["CPU-ს ნაკადი"]
               ? "#E52F2F"
               : "#98c7e6"
           }
           focusBorderColor="transparent"
           border="none"
           my="5px"
-          name="cpuStream"
-          id="cpuStream"
+          name="CPU-ს ნაკადი"
+          id="CPU-ს ნაკადი"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         <Text
           fontSize="14px"
           color={
-            formik.touched.cpuStream && formik.errors.cpuStream && "#E52F2F"
+            formik.touched["CPU-ს ნაკადი"] &&
+            formik.errors["CPU-ს ნაკადი"] &&
+            "#E52F2F"
           }
         >
-          {formik.errors.cpuStream ? formik.errors.cpuStream : "მხოლოდ ციფრები"}
+          {formik.errors["CPU-ს ნაკადი"]
+            ? formik.errors["CPU-ს ნაკადი"]
+            : "მხოლოდ ციფრები"}
         </Text>
       </Box>
       <Box
@@ -165,7 +181,11 @@ function SecondLayout({ formik }) {
             <Text
               fontWeight="500"
               fontSize="18px"
-              color={formik.errors.memory && formik.touched.memory && "#E52F2F"}
+              color={
+                formik.errors["მეხსიერების ტიპი"] &&
+                formik.touched["მეხსიერების ტიპი"] &&
+                "#E52F2F"
+              }
             >
               მეხსიერების ტიპი
             </Text>
@@ -175,7 +195,10 @@ function SecondLayout({ formik }) {
               src={error}
               alt="error"
               display={
-                formik.errors.memory && formik.touched.memory ? "block" : "none"
+                formik.errors["მეხსიერების ტიპი"] &&
+                formik.touched["მეხსიერების ტიპი"]
+                  ? "block"
+                  : "none"
               }
             />
           </Flex>
@@ -188,8 +211,8 @@ function SecondLayout({ formik }) {
           >
             <RadioGroup
               w="100%"
-              name="memory"
-              id="memory"
+              name="მეხსიერების ტიპი"
+              id="მეხსიერების ტიპი"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             >
@@ -203,7 +226,7 @@ function SecondLayout({ formik }) {
                   onChange={(e) =>
                     formik.setValues({
                       ...formik.values,
-                      memory: e.target.value,
+                      "მეხსიერების ტიპი": e.target.value,
                     })
                   }
                 >
@@ -215,7 +238,7 @@ function SecondLayout({ formik }) {
                   onChange={(e) =>
                     formik.setValues({
                       ...formik.values,
-                      memory: e.target.value,
+                      "მეხსიერების ტიპი": e.target.value,
                     })
                   }
                 >

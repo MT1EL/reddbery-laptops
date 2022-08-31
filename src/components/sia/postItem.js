@@ -9,7 +9,7 @@ function PostItem({ item }) {
     dispatch({ type: "SETCURRENTPOST", payload: { item } });
     navigate("/Singlepost");
   };
-
+  console.log(item);
   return (
     <Box
       backgroundColor="#EAFAFF"

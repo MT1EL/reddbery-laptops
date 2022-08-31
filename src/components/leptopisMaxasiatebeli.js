@@ -23,16 +23,16 @@ function LeptopisMaxasiatebeli() {
   const formik = useFormik({
     initialValues: {
       imageUrl: "",
-      name: "",
-      brand: "",
-      cpu: "",
-      cpuCore: "",
-      cpuStream: "",
+      "ლეპტოპის სახელი": "",
+      "ლეპტოპის ბრენდი": "",
       RAM: "",
-      memory: "",
-      condition: "",
-      price: "",
-      PurchaseNumber: "",
+      "მეხსიერების ტიპი": "",
+      CPU: "",
+      "CPU-ს ბირთვი": "",
+      "CPU-ს ნაკადი": "",
+      "ლეპტოპის მდგომარეობა": "",
+      "ლეპტოპის ფასი": "",
+      "შეძენის რიცხვი": "",
     },
 
     validationSchema: yup.object({

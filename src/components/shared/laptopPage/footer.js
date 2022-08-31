@@ -24,23 +24,18 @@ function Footer({ formik }) {
         mt="8"
       >
         <Box width={["100%", "370px"]}>
-          <Text
-            fontWeight="500"
-            fontSize="18px"
-            color={formik.touched.name && formik.errors.name && "#E52F2F"}
-          >
+          <Text fontWeight="500" fontSize="18px">
             შეძენის რიცხვი (არჩევითი)
           </Text>
           <Input
             type="date"
-            placeholder="დდ/თთ/წწწწ"
             width={["100%", "370px,"]}
             outlineColor={"#98c7e6"}
             focusBorderColor="transparent"
             border="none"
             my="5px"
-            name="PurchaseNumber"
-            id="PurchaseNumber"
+            name="შეძენის რიცხვი"
+            id="შეძენის რიცხვი"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -50,7 +45,11 @@ function Footer({ formik }) {
           <Text
             fontWeight="500"
             fontSize="18px"
-            color={formik.touched.name && formik.errors.name && "#E52F2F"}
+            color={
+              formik.touched["ლეპტოპის ფასი"] &&
+              formik.errors["ლეპტოპის ფასი"] &&
+              "#E52F2F"
+            }
           >
             ლეპტოპის ფასი
           </Text>
@@ -62,22 +61,27 @@ function Footer({ formik }) {
             focusBorderColor="transparent"
             border="none"
             my="5px"
-            name="price"
-            id="price"
+            name="ლეპტოპის ფასი"
+            id="ლეპტოპის ფასი"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           <Text
             fontSize="14px"
-            color={formik.touched.price && formik.errors.price && "#E52F2F"}
+            color={
+              formik.touched["ლეპტოპის ფასი"] &&
+              formik.errors["ლეპტოპის ფასი"] &&
+              "#E52F2F"
+            }
           >
-            {formik.errors.price ? formik.errors.price : "მხოლოდ რიცხვები"}
+            {formik.errors["ლეპტოპის ფასი"]
+              ? formik.errors["ლეპტოპის ფასი"]
+              : "მხოლოდ რიცხვები"}
           </Text>
         </Box>
       </Box>
       <Box mx="auto" width={["100%", "90%"]}>
         <Box
-          // ml={["0", "10"]}
           display="flex"
           flexDirection="column"
           w={["min(100%, 280px)", "280px"]}
@@ -88,7 +92,9 @@ function Footer({ formik }) {
               fontWeight="500"
               fontSize="18px"
               color={
-                formik.errors.condition && formik.touched.condition && "#E52F2F"
+                formik.errors["ლეპტოპის მდგომარეობა"] &&
+                formik.touched["ლეპტოპის მდგომარეობა"] &&
+                "#E52F2F"
               }
             >
               ლეპტოპის მდგომარეობა
@@ -99,7 +105,8 @@ function Footer({ formik }) {
               src={error}
               alt="error"
               display={
-                formik.errors.condition && formik.touched.condition
+                formik.errors["ლეპტოპის მდგომარეობა"] &&
+                formik.touched["ლეპტოპის მდგომარეობა"]
                   ? "block"
                   : "none"
               }
@@ -113,15 +120,19 @@ function Footer({ formik }) {
             alignSelf="flex-start"
             w="100%"
           >
-            <RadioGroup w="100%" name="condition" onBlur={formik.handleBlur}>
+            <RadioGroup
+              w="100%"
+              name="ლეპტოპის მდგომარეობა"
+              onBlur={formik.handleBlur}
+            >
               <Box display="flex" justifyContent="space-between">
                 <Radio
                   value="ახალი"
-                  name="condition"
+                  name="ლეპტოპის მდგომარეობა"
                   onChange={(e) =>
                     formik.setValues({
                       ...formik.values,
-                      condition: e.target.value,
+                      "ლეპტოპის მდგომარეობა": e.target.value,
                     })
                   }
                 >
@@ -130,11 +141,11 @@ function Footer({ formik }) {
                 <Radio
                   value="მოერადი"
                   justifySelf="flex-end"
-                  name="condition"
+                  name="ლეპტოპის მდგომარეობა"
                   onChange={(e) =>
                     formik.setValues({
                       ...formik.values,
-                      condition: e.target.value,
+                      "ლეპტოპის მდგომარეობა": e.target.value,
                     })
                   }
                 >

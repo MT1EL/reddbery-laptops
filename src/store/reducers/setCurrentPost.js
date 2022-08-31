@@ -24,9 +24,6 @@ const initialState = {
 export default function setCurrentReducer(state = initialState, action) {
   switch (action.type) {
     case "SETCURRENTPOST": {
-      console.log("current postis rediusershi sehdis es informacia:");
-      console.log(action);
-
       return {
         ...state,
         user: {

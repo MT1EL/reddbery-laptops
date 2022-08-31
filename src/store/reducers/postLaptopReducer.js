@@ -17,9 +17,6 @@ const initialState = {
 export default function postLaptopReducer(state = initialState, action) {
   switch (action.type) {
     case "POSTLAPTOP": {
-      console.log("leptopis rediusershi sehdis es informacia");
-      console.log(action);
-
       return {
         ...state,
 

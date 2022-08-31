@@ -15,7 +15,11 @@ function FirstLayout({ formik }) {
           <Text
             fontWeight="500"
             fontSize="18px"
-            color={formik.touched.name && formik.errors.name && "#E52F2F"}
+            color={
+              formik.touched["ლეპტოპის სახელი"] &&
+              formik.errors["ლეპტოპის სახელი"] &&
+              "#E52F2F"
+            }
           >
             ლეპტოპის სახელი
           </Text>
@@ -24,22 +28,29 @@ function FirstLayout({ formik }) {
             placeholder="HP"
             width={["100%", "400px,"]}
             outlineColor={
-              formik.touched.name && formik.errors.name ? "#E52F2F" : "#98c7e6"
+              formik.touched["ლეპტოპის სახელი"] &&
+              formik.errors["ლეპტოპის სახელი"]
+                ? "#E52F2F"
+                : "#98c7e6"
             }
             focusBorderColor="transparent"
             border="none"
             my="5px"
-            name="name"
-            id="name"
+            name="ლეპტოპის სახელი"
+            id="ლეპტოპის სახელი"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           <Text
             fontSize="14px"
-            color={formik.touched.name && formik.errors.name && "#E52F2F"}
+            color={
+              formik.touched["ლეპტოპის სახელი"] &&
+              formik.errors["ლეპტოპის სახელი"] &&
+              "#E52F2F"
+            }
           >
-            {formik.errors.name
-              ? formik.errors.name
+            {formik.errors["ლეპტოპის სახელი"]
+              ? formik.errors["ლეპტოპის სახელი"]
               : "ლათინური ასოები, ციფრები, !@#$%^&*()_+= "}
           </Text>
         </Box>
@@ -51,17 +62,19 @@ function FirstLayout({ formik }) {
             my="4"
             mt="6"
             width={["100%", "min(100%, 400px)"]}
-            name="brand"
-            value={formik.values.brand}
+            name="ლეპტოპის ბრენდი"
+            value={formik.values["ლეპტოპის ბრენდი"]}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             focusBorderColor={
-              formik.touched.brand && formik.errors.brand
+              formik.touched["ლეპტოპის ბრენდი"] &&
+              formik.errors["ლეპტოპის ბრენდი"]
                 ? "#E52F2F"
                 : "#98c7e6"
             }
             borderColor={
-              formik.touched.brand && formik.errors.brand
+              formik.touched["ლეპტოპის ბრენდი"] &&
+              formik.errors["ლეპტოპის ბრენდი"]
                 ? "#E52F2F"
                 : "#98c7e6"
             }
