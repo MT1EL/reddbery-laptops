@@ -5,6 +5,7 @@ import store from "../../store";
 import PostItem from "./postItem";
 function Sia() {
   const state = store.getState();
+  console.log(state);
   return (
     <Box>
       <SiaHeader title="ჩანაწერების სია" />
