@@ -37,15 +37,17 @@ function LeptopisMaxasiatebeli() {
 
     validationSchema: yup.object({
       imageUrl: yup.string().required(),
-      name: yup.string().required("ლათინური ასოები, ციფრები, !@#$%^&*()_+= "),
-      brand: yup.string().required(),
-      cpu: yup.string().required(),
-      cpuCore: yup.string().required("მხოლოდ ციფრები"),
-      cpuStream: yup.string().required("მხოლოდ ციფრები"),
+      "ლეპტოპის სახელი": yup
+        .string()
+        .required("ლათინური ასოები, ციფრები, !@#$%^&*()_+= "),
+      "ლეპტოპის ბრენდი": yup.string().required(),
+      CPU: yup.string().required(),
+      "CPU-ს ბირთვი": yup.string().required("მხოლოდ ციფრები"),
+      "CPU-ს ნაკადი": yup.string().required("მხოლოდ ციფრები"),
       RAM: yup.string().required("მხოლოდ ციფრები"),
-      memory: yup.string().required(),
-      condition: yup.string().required(),
-      price: yup.number().required("მხოლოდ რიცხვები"),
+      "მეხსიერების ტიპი": yup.string().required(),
+      "ლეპტოპის მდგომარეობა": yup.string().required(),
+      "ლეპტოპის ფასი": yup.number().required("მხოლოდ რიცხვები"),
     }),
     onSubmit: async (values) => {
       dispatch({ type: "POSTLAPTOP", payload: { laptop: formik.values } });

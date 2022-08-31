@@ -22,16 +22,16 @@ export default function postLaptopReducer(state = initialState, action) {
 
         laptop: {
           imageUrl: action.payload.laptop.imageUrl,
-          "ლეპტოპის სახელი": action.payload.laptop.name,
-          "ლეპტოპის ბრენდი": action.payload.laptop.brand,
+          "ლეპტოპის სახელი": action.payload.laptop["ლეპტოპის სახელი"],
+          "ლეპტოპის ბრენდი": action.payload.laptop["ლეპტოპის ბრენდი"],
           RAM: action.payload.laptop.RAM,
-          "მეხსიერების ტიპი": action.payload.laptop.memory,
+          "მეხსიერების ტიპი": action.payload.laptop["მეხსიერების ტიპი"],
           CPU: action.payload.laptop.cpu,
-          "CPU-ს ბირთვი": action.payload.laptop.cpuCore,
-          "CPU-ს ნაკადი": action.payload.laptop.cpuStream,
-          "ლეპტოპის მდგომარეობა": action.payload.laptop.condition,
-          "ლეპტოპის ფასი": action.payload.laptop.price,
-          "შეძენის რიცხვი": action.payload.laptop.PurchaseNumber,
+          "CPU-ს ბირთვი": action.payload.laptop["CPU-ს ბირთვი"],
+          "CPU-ს ნაკადი": action.payload.laptop["CPU-ს ნაკადი"],
+          "ლეპტოპის მდგომარეობა": action.payload.laptop["ლეპტოპის მდგომარეობა"],
+          "ლეპტოპის ფასი": action.payload.laptop["ლეპტოპის ფასი"],
+          "შეძენის რიცხვი": action.payload.laptop["შეძენის რიცხვი"],
         },
       };
     }

@@ -4,7 +4,6 @@ import store from "../store";
 import SiaHeader from "./sia/header";
 function SinglePost() {
   const state = store.getState().setCurrentReducer;
-  console.log(state);
   return (
     <Box>
       <SiaHeader title="ლეპტოპის ინფო" />
@@ -33,7 +32,6 @@ function SinglePost() {
             h={["", "300px"]}
           >
             {Object.keys(state.user).map((key, index) => {
-              console.log(state.user[key.toString()]);
               return (
                 <Grid
                   templateColumns={"1fr 1fr"}
