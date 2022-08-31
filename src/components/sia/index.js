@@ -5,7 +5,6 @@ import store from "../../store";
 import PostItem from "./postItem";
 function Sia() {
   const state = store.getState();
-  console.log(state);
   return (
     <Box>
       <SiaHeader title="ჩანაწერების სია" />
@@ -18,7 +17,7 @@ function Sia() {
         w="min(100%, 1160px)"
         mx="auto"
       >
-        {state.postContainerReducer.posts.slice(21).map((item, index) => (
+        {state.postContainerReducer.posts.map((item, index) => (
           <PostItem item={item} key={index} />
         ))}
       </SimpleGrid>
