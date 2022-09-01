@@ -1,16 +1,14 @@
 import React from "react";
-import { Box, SimpleGrid, Text, Grid } from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import ValuesGrid from "./valuesGrid";
 function SecondLayout({ state, reduxState }) {
-  console.log(state);
-  console.log(reduxState);
   const laptop = state.laptop;
 
   const leftSide = [
     { key: "laptop_name", value: laptop.name },
     {
       key: "laptop_brand",
-      value: reduxState.brandReducer.data[laptop.brand_id - 3].name,
+      value: reduxState.brandReducer.data[laptop.brand_id - 1].name,
     },
     { key: "RAM", value: laptop.ram },
     { key: "hard_drive_type", value: laptop.hard_drive_type },

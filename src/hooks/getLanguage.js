@@ -17,7 +17,6 @@ export default function getLanguage(e) {
     english: /^[a-zA-Z]+$/,
     //add other languages her
   };
-  /* უნდა ვცადო მერე თუ შევძლებ რომ დავამატო ასოს წაშლაზე არეიდან ის ენა რომ ამოიღოს */
   Object.entries(langdic).forEach(([key, value]) => {
     // loop to read all the dictionary items if not true
     if (toCheck.length === 0) {

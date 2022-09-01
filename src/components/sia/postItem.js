@@ -1,12 +1,9 @@
 import React from "react";
 import { Box, Grid, Image, Link, Text } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 function PostItem({ item }) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = async () => {
-    // dispatch({ type: "SETCURRENTPOST", payload: { item } });
     navigate("/Singlepost", { state: { id: item.laptop.id } });
   };
   return (

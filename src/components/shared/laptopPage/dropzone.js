@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 
 import { Box, Image, Text, Button, Input } from "@chakra-ui/react";
 import camera from "../../../assets/camera.png";
@@ -15,21 +15,6 @@ function DropComponent({ formik, setError }) {
       }),
     });
   };
-
-  // const onDrop = useCallback((acceptedFiles) => {
-  //   acceptedFiles.map((file) => {
-  //     const reader = new FileReader();
-  //     reader.onload = function (e) {
-  //       formik.setValues({
-  //         ...formik.values,
-  //         laptop_image: e.target.result,
-  //       });
-  //     };
-
-  //     reader.readAsDataURL(file);
-  //     return file;
-  //   });
-  // }, []);
   return (
     <Dropzone onDrop={onDrop}>
       {({ getRootProps, getInputProps }) => (

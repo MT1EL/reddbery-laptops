@@ -1,8 +1,7 @@
 import React from "react";
 import { Text, Grid } from "@chakra-ui/react";
 import translator from "../../hooks/translate";
-function ValuesGrid({ tomap, state, from, translatorSufix }) {
-  console.log(state[from]);
+function ValuesGrid({ tomap, from, translatorSufix }) {
   return tomap.map((key, index) => {
     return (
       <Grid

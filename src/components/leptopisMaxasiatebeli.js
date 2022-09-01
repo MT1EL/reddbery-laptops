@@ -70,7 +70,6 @@ function LeptopisMaxasiatebeli() {
         );
     },
   });
-  console.log(error);
 
   return (
     <Box backgroundColor={["#fff", "#F6F6F6"]}>

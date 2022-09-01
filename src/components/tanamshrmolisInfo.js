@@ -98,13 +98,11 @@ function TanamshrmolisInfo() {
       if (redberry !== "@redberry.ge") {
         errors.email = "უნდა მთავრდებოდეს @redberry.ge-ით";
       }
-      // let number = formik.values.number;
-      // const numberValidation = number.match(
-      //   /\+\d{3}[ -]?\d{3}[ -]\d{2}[ -]\d{2}[ -]\d{2}/g
-      // );
-      // if (numberValidation === null) {
-      //   errors.number = "არასწორი ფორმატი";
-      // }
+      let number = formik.values.number;
+      const numberValidation = number.match(/\+995/g);
+      if (numberValidation === null || /\s/.test(number) === true) {
+        errors.number = "არასწორი ფორმატი";
+      }
 
       return errors;
     },

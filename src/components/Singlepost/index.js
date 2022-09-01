@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Image, SimpleGrid, Text, Grid } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import store from "../../store";
 import SiaHeader from "../sia/header";
 import { apiCall } from "../../hooks/apiCall";

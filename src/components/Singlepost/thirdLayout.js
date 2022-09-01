@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Box, SimpleGrid, Text, Grid } from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import ValuesGrid from "./valuesGrid";
 import translator from "../../hooks/translate";
-function ThirdLayout({ state, reduxState }) {
+function ThirdLayout({ state }) {
   const laptop = state.laptop;
   const left = [
     { key: "state", value: translator(laptop.state) },
