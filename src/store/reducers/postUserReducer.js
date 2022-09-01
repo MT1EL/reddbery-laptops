@@ -6,7 +6,7 @@ const initialState = {
     position_id: "",
     email: "",
     phone_number: "",
-    token: "",
+    token: "7de1619aa2a1cf2a4369c6512551c306",
   },
 };
 
