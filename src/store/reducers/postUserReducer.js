@@ -6,7 +6,7 @@ const initialState = {
     position_id: "",
     email: "",
     phone_number: "",
-    token: "7de1619aa2a1cf2a4369c6512551c306",
+    token: process.env.TOKEN,
   },
 };
 
@@ -22,9 +22,6 @@ export default function postUserReducer(state = initialState, action) {
           position_id: +action.payload.user?.position_id,
           email: action.payload.user?.email,
           phone_number: action.payload.user?.number,
-          token: action.payload.user.token
-            ? action.payload.user?.token
-            : "7de1619aa2a1cf2a4369c6512551c306",
         },
       };
     }

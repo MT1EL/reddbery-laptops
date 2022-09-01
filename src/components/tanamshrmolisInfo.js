@@ -48,7 +48,6 @@ function TanamshrmolisInfo() {
             position_id: values.position_id,
             email: values.email,
             number: values.number,
-            token: "7de1619aa2a1cf2a4369c6512551c306",
           },
         },
       });
