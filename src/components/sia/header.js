@@ -6,12 +6,7 @@ import circle from "../../assets/backIconCircle.png";
 import {useNavigate} from 'react-router-dom'
 function SiaHeader({ title }) {
   const navigate = useNavigate()
-  const route;
-  if(title === 'ჩანაწერების სია'){
-    route = '/'
-  }else{
-    route = '/sia'
-  }
+  const route = title === 'ჩანაწერების სია' ? '/' : '/sia';
   return (
     <Box>
       <Flex justifyContent="space-between" alignItems="center" py="8" px="6">
