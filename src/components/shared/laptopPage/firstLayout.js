@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Input, Text, Select } from "@chakra-ui/react";
+import { api } from "../../../api";
 function FirstLayout({ formik }) {
+  const [brands, setBrands] = useState();
+  useEffect(() => {
+    fetch(`${api}/brands`)
+      .then((res) => res.json())
+      .then((res) => setBrands(res))
+      .catch((e) => console.log(e));
+  }, []);
   return (
     <>
       <Box
@@ -16,8 +24,8 @@ function FirstLayout({ formik }) {
             fontWeight="500"
             fontSize="18px"
             color={
-              formik.touched["ლეპტოპის სახელი"] &&
-              formik.errors["ლეპტოპის სახელი"] &&
+              formik.touched.laptop_name &&
+              formik.errors.laptop_name &&
               "#E52F2F"
             }
           >
@@ -28,29 +36,28 @@ function FirstLayout({ formik }) {
             placeholder="HP"
             width={["100%", "400px,"]}
             outlineColor={
-              formik.touched["ლეპტოპის სახელი"] &&
-              formik.errors["ლეპტოპის სახელი"]
+              formik.touched.laptop_name && formik.errors.laptop_name
                 ? "#E52F2F"
                 : "#98c7e6"
             }
             focusBorderColor="transparent"
             border="none"
             my="5px"
-            name="ლეპტოპის სახელი"
-            id="ლეპტოპის სახელი"
+            name="laptop_name"
+            id="laptop_name"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           <Text
             fontSize="14px"
             color={
-              formik.touched["ლეპტოპის სახელი"] &&
-              formik.errors["ლეპტოპის სახელი"] &&
+              formik.touched.laptop_name &&
+              formik.errors.laptop_name &&
               "#E52F2F"
             }
           >
-            {formik.errors["ლეპტოპის სახელი"]
-              ? formik.errors["ლეპტოპის სახელი"]
+            {formik.errors.laptop_name
+              ? formik.errors.laptop_name
               : "ლათინური ასოები, ციფრები, !@#$%^&*()_+= "}
           </Text>
         </Box>
@@ -62,28 +69,26 @@ function FirstLayout({ formik }) {
             my="4"
             mt="6"
             width={["100%", "min(100%, 400px)"]}
-            name="ლეპტოპის ბრენდი"
-            value={formik.values["ლეპტოპის ბრენდი"]}
+            name="laptop_brand_id"
+            value={formik.values.laptop_brand_id}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             focusBorderColor={
-              formik.touched["ლეპტოპის ბრენდი"] &&
-              formik.errors["ლეპტოპის ბრენდი"]
+              formik.touched.laptop_brand_id && formik.errors.laptop_brand_id
                 ? "#E52F2F"
                 : "#98c7e6"
             }
             borderColor={
-              formik.touched["ლეპტოპის ბრენდი"] &&
-              formik.errors["ლეპტოპის ბრენდი"]
+              formik.touched.laptop_brand_id && formik.errors.laptop_brand_id
                 ? "#E52F2F"
                 : "#98c7e6"
             }
           >
-            <option value="Apple">Apple</option>
-            <option value="HP">HP</option>
-            <option value="Lenovo">Lenovo</option>
-            <option value="Dell">Dell</option>
-            <option value="Acer">Acer</option>
+            {brands?.data.map((option) => (
+              <option value={option.id} key={option.id}>
+                {option.name}
+              </option>
+            ))}
           </Select>
         </Box>
       </Box>

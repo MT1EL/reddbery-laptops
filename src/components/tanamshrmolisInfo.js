@@ -1,23 +1,27 @@
-import React from "react";
-import { Box, Text, Input, Select, Button, Img } from "@chakra-ui/react";
-
+import React, { useEffect, useState } from "react";
+import { Box, Select, Button, Img } from "@chakra-ui/react";
+import CustomInput from "./shared/input";
+import CustomSelect from "./shared/select";
 import logo from "../assets/icon-logo.png";
-import getLanguage from "../helperfunctions/getLanguage";
+import getLanguage from "../hooks/getLanguage";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import Header from "./shared/header";
+import { api } from "../api";
 function TanamshrmolisInfo() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [teamData, setTeamData] = useState();
+  const [posData, setPosData] = useState();
   const formik = useFormik({
     initialValues: {
       name: "",
       surname: "",
       team: "",
-      position: "",
+      position_id: "",
       email: "",
       number: "",
     },
@@ -26,7 +30,7 @@ function TanamshrmolisInfo() {
       name: yup.string().required("მინიმუმ 2 სიმბოლო, ქართული ასოები"),
       surname: yup.string().required("მინიმუმ 2 სიმბოლო, ქართული ასოები"),
       team: yup.string().required("required"),
-      position: yup.string().required("required"),
+      position_id: yup.number().required("required"),
       email: yup.string().required("უნდა მთავრდებოდეს @redberry.ge-ით"),
       number: yup
         .number("")
@@ -38,11 +42,13 @@ function TanamshrmolisInfo() {
         type: "POSTUSER",
         payload: {
           user: {
-            name: values.name + " " + values.surname,
-            team: values.team,
-            position: values.position,
-            mail: values.email,
+            name: values.name,
+            surname: values.surname,
+            team: JSON.parse(values.team).id,
+            position_id: values.position_id,
+            email: values.email,
             number: values.number,
+            token: "d603c42ec0855d438f643183b25b8759",
           },
         },
       });
@@ -78,8 +84,11 @@ function TanamshrmolisInfo() {
         errors.team = "required";
       }
 
-      if (!formik.values.position) {
-        errors.position = "required";
+      if (
+        !formik.values.position_id &&
+        typeof formik.values.position_id !== "number"
+      ) {
+        errors.position_id = "required";
       }
 
       const email = formik.values.email;
@@ -89,18 +98,32 @@ function TanamshrmolisInfo() {
       if (redberry !== "@redberry.ge") {
         errors.email = "უნდა მთავრდებოდეს @redberry.ge-ით";
       }
-
-      let number = formik.values.number;
-      const numberValidation = number.match(
-        /\+\d{3}[ -]?\d{3}[ -]\d{2}[ -]\d{2}[ -]\d{2}/g
-      );
-      if (numberValidation === null) {
-        errors.number = "არასწორი ფორმატი";
-      }
+      // let number = formik.values.number;
+      // const numberValidation = number.match(
+      //   /\+\d{3}[ -]?\d{3}[ -]\d{2}[ -]\d{2}[ -]\d{2}/g
+      // );
+      // if (numberValidation === null) {
+      //   errors.number = "არასწორი ფორმატი";
+      // }
 
       return errors;
     },
   });
+
+  useEffect(() => {
+    fetch(`${api}/teams`)
+      .then((res) => res.json())
+      .then((res) => setTeamData(res))
+      .catch((e) => console.log(e));
+
+    fetch(`${api}/positions`)
+      .then((res) => res.json())
+      .then((res) => {
+        setPosData(res);
+        dispatch({ type: "POSTPOSITION", res });
+      })
+      .catch((e) => console.log(e));
+  }, []);
 
   return (
     <Box>
@@ -122,87 +145,35 @@ function TanamshrmolisInfo() {
             flexWrap="wrap"
           >
             <Box w={["100%", "370px"]}>
-              <Text
-                fontWeight="500"
-                fontSize="18px"
-                color={formik.touched.name && formik.errors.name && "#E52F2F"}
-              >
-                სახელი
-              </Text>
-              <Input
-                type="text"
+              <CustomInput
+                formlabel="სახელი"
+                inputname="name"
                 placeholder="გრიშა"
-                w={["100%", "370px"]}
-                outlineColor={
-                  formik.touched.name && formik.errors.name
-                    ? "#E52F2F"
-                    : "#98c7e6"
-                }
-                focusBorderColor="transparent"
-                border="none"
-                my="5px"
-                name="name"
-                id="name"
-                value={formik.values.name}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+                formik={formik}
+                type="text"
+                helperText="მინიმუმ 2 სიმბოლო, ქართული ასოები"
               />
-              <Text
-                fontSize="14px"
-                color={formik.touched.name && formik.errors.name && "#E52F2F"}
-              >
-                {formik.errors.name
-                  ? formik.errors.name
-                  : "მინიმუმ 2 სიმბოლო, ქართული ასოები"}
-              </Text>
             </Box>
             <Box w={["100%", "370px"]}>
-              <Text
-                fontWeight="500"
-                fontSize="18px"
-                color={
-                  formik.touched.surname && formik.errors.surname && "#E52F2F"
-                }
-              >
-                გვარი
-              </Text>
-              <Input
+              <CustomInput
+                formlabel="გვარი"
+                inputname="surname"
                 placeholder="ბაგრატიონი"
-                w={["100%", "370px"]}
-                outlineColor={
-                  formik.touched.surname && formik.errors.surname
-                    ? "#E52F2F"
-                    : "#98c7e6"
-                }
-                focusBorderColor="transparent"
-                border="none"
-                my="5px"
-                name="surname"
-                id="surname"
-                value={formik.values.surname}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
+                formik={formik}
+                type="text"
+                helperText="მინიმუმ 2 სიმბოლო, ქართული ასოები"
               />
-              <Text
-                fontSize="14px"
-                color={
-                  formik.touched.surname && formik.errors.surname && "#E52F2F"
-                }
-              >
-                {formik.errors.surname
-                  ? formik.errors.surname
-                  : "მინიმუმ 2 სიმბოლო, ქართული ასოები"}
-              </Text>
             </Box>
           </Box>
+
           <Select
             variant="filled"
-            placeholder="თიმი"
-            my="4"
-            name="team"
+            placeholder={"თიმი"}
+            name={"team"}
             value={formik.values.team}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            my="4"
             focusBorderColor={
               formik.touched.team && formik.errors.team ? "#E52F2F" : "#98c7e6"
             }
@@ -210,101 +181,38 @@ function TanamshrmolisInfo() {
               formik.touched.team && formik.errors.team ? "#E52F2F" : "#98c7e6"
             }
           >
-            <option value="დეველოპმენტი">დეველოპმენტი</option>
-            <option value="HR">HR</option>
-            <option value="გაყიდვები">გაყიდვები</option>
-            <option value="დიზაინი">დიზაინი</option>
-            <option value="მარკეტინგი">მარკეტინგი</option>
+            {teamData?.data?.map((option) => (
+              <option value={JSON.stringify(option)} key={option.id}>
+                {option.name}
+              </option>
+            ))}
           </Select>
 
-          <Select
-            variant="filled"
+          <CustomSelect
+            name="position_id"
             placeholder="პოზიცია"
-            my="4"
-            name="position"
-            value={formik.values.position}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            focusBorderColor={
-              formik.touched.position && formik.errors.position
-                ? "#E52F2F"
-                : "#98c7e6"
-            }
-            borderColor={
-              formik.touched.position && formik.errors.position
-                ? "#E52F2F"
-                : "#98c7e6"
-            }
-          >
-            <option value="დეველოპმენტი">დეველოპმენტი</option>
-            <option value="HR">HR</option>
-            <option value="გაყიდვები">გაყიდვები</option>
-            <option value="დიზაინი">დიზაინი</option>
-            <option value="მარკეტინგი">მარკეტინგი</option>
-          </Select>
+            formik={formik}
+            data={posData}
+          />
 
           <Box w="100%" my="4">
-            <Text
-              fontWeight="500"
-              fontSize="18px"
-              color={formik.touched.email && formik.errors.email && "#E52F2F"}
-            >
-              მეილი
-            </Text>
-            <Input
+            <CustomInput
+              formlabel="მეილი"
+              inputname="email"
               placeholder="grish666@redberry.ge"
-              outlineColor={
-                formik.touched.email && formik.errors.email
-                  ? "#E52F2F"
-                  : "#98c7e6"
-              }
-              focusBorderColor="transparent"
-              border="none"
-              my="5px"
+              formik={formik}
               type="email"
-              name="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              helperText="უნდა მთავრდებოდეს @redberry.ge-ით"
             />
-            <Text
-              fontSize="14px"
-              color={formik.touched.email && formik.errors.email && "#E52F2F"}
-            >
-              უნდა მთავრდებოდეს @redberry.ge-ით
-            </Text>
           </Box>
           <Box w="100%" my="4">
-            <Text
-              fontWeight="500"
-              fontSize="18px"
-              color={formik.touched.number && formik.errors.number && "#E52F2F"}
-            >
-              ტელეფონის ნომერი
-            </Text>
-            <Input
+            <CustomInput
+              formlabel="ტელეფონის ნომერი"
+              inputname="number"
               placeholder="+995 598 00 07 01"
-              outlineColor={
-                formik.touched.number && formik.errors.number
-                  ? "#E52F2F"
-                  : "#98c7e6"
-              }
-              focusBorderColor="transparent"
-              border="none"
-              my="5px"
-              name="number"
-              value={formik.values.number}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
+              formik={formik}
+              helperText="უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს"
             />
-            <Text
-              fontSize="14px"
-              color={formik.touched.number && formik.errors.number && "#E52F2F"}
-            >
-              {formik.errors.number
-                ? formik.errors.number
-                : "ქართული მობ-ნომრის ფორმატი"}
-            </Text>
           </Box>
           <Button
             backgroundColor="#62A1EB"

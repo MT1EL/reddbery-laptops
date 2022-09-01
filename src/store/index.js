@@ -10,18 +10,20 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import postContainerReducer from "./reducers/postContainerReducer";
-import postLaptopReducer from "./reducers/postLaptopReducer";
+import brandReducer from "./reducers/brandrReducer";
+import teamReducer from "./reducers/teamReducer";
 import postUserReducer from "./reducers/postUserReducer";
 import setCurrentReducer from "./reducers/setCurrentPost";
+import positionReducer from "./reducers/positionReducer";
 const presistConfig = {
   key: "counter",
   storage,
 };
 
 const reducers = combineReducers({
-  postContainerReducer,
-  postLaptopReducer,
+  brandReducer,
+  teamReducer,
+  positionReducer,
   postUserReducer,
   setCurrentReducer,
 });

@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import SiaHeader from "./header";
 import store from "../../store";
 import PostItem from "./postItem";
+import { apiCall } from "../../hooks/apiCall";
+import { api } from "../../api";
 function Sia() {
   const state = store.getState();
-  const toMap = state.postContainerReducer.posts?.slice().reverse();
+  const [data, setData] = useState();
+  useEffect(() => {
+    apiCall("get", `${api}/laptops`, {
+      params: {
+        token: state.postUserReducer.user.token,
+      },
+    })
+      .then((res) => setData(res.data))
+      .catch((e) => console.log(e));
+  }, []);
+
   return (
     <Box>
       <SiaHeader title="ჩანაწერების სია" />
@@ -17,9 +29,12 @@ function Sia() {
         w="min(100%, 1160px)"
         mx="auto"
       >
-        {toMap.map((item, index) => (
-          <PostItem item={item} key={index} />
-        ))}
+        {data
+          ?.slice()
+          .reverse()
+          .map((item, index) => (
+            <PostItem item={item} key={index} />
+          ))}
       </SimpleGrid>
     </Box>
   );

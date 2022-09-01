@@ -34,8 +34,8 @@ function Footer({ formik }) {
             focusBorderColor="transparent"
             border="none"
             my="5px"
-            name="შეძენის რიცხვი"
-            id="შეძენის რიცხვი"
+            name="laptop_purchase_date"
+            id="laptop_purchase_date"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -46,8 +46,8 @@ function Footer({ formik }) {
             fontWeight="500"
             fontSize="18px"
             color={
-              formik.touched["ლეპტოპის ფასი"] &&
-              formik.errors["ლეპტოპის ფასი"] &&
+              formik.touched.laptop_price &&
+              formik.errors.laptop_price &&
               "#E52F2F"
             }
           >
@@ -61,21 +61,21 @@ function Footer({ formik }) {
             focusBorderColor="transparent"
             border="none"
             my="5px"
-            name="ლეპტოპის ფასი"
-            id="ლეპტოპის ფასი"
+            name="laptop_price"
+            id="laptop_price"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           <Text
             fontSize="14px"
             color={
-              formik.touched["ლეპტოპის ფასი"] &&
-              formik.errors["ლეპტოპის ფასი"] &&
+              formik.touched.laptop_price &&
+              formik.errors.laptop_price &&
               "#E52F2F"
             }
           >
-            {formik.errors["ლეპტოპის ფასი"]
-              ? formik.errors["ლეპტოპის ფასი"]
+            {formik.errors.laptop_price
+              ? formik.errors.laptop_price
               : "მხოლოდ რიცხვები"}
           </Text>
         </Box>
@@ -92,8 +92,8 @@ function Footer({ formik }) {
               fontWeight="500"
               fontSize="18px"
               color={
-                formik.errors["ლეპტოპის მდგომარეობა"] &&
-                formik.touched["ლეპტოპის მდგომარეობა"] &&
+                formik.errors.laptop_state &&
+                formik.touched.laptop_state &&
                 "#E52F2F"
               }
             >
@@ -105,8 +105,7 @@ function Footer({ formik }) {
               src={error}
               alt="error"
               display={
-                formik.errors["ლეპტოპის მდგომარეობა"] &&
-                formik.touched["ლეპტოპის მდგომარეობა"]
+                formik.errors.laptop_state && formik.touched.laptop_state
                   ? "block"
                   : "none"
               }
@@ -120,32 +119,28 @@ function Footer({ formik }) {
             alignSelf="flex-start"
             w="100%"
           >
-            <RadioGroup
-              w="100%"
-              name="ლეპტოპის მდგომარეობა"
-              onBlur={formik.handleBlur}
-            >
+            <RadioGroup w="100%" name="laptop_state" onBlur={formik.handleBlur}>
               <Box display="flex" justifyContent="space-between">
                 <Radio
-                  value="ახალი"
-                  name="ლეპტოპის მდგომარეობა"
+                  value="new"
+                  name="laptop_state"
                   onChange={(e) =>
                     formik.setValues({
                       ...formik.values,
-                      "ლეპტოპის მდგომარეობა": e.target.value,
+                      laptop_state: e.target.value,
                     })
                   }
                 >
                   ახალი
                 </Radio>
                 <Radio
-                  value="მოერადი"
+                  value="used"
                   justifySelf="flex-end"
-                  name="ლეპტოპის მდგომარეობა"
+                  name="laptop_state"
                   onChange={(e) =>
                     formik.setValues({
                       ...formik.values,
-                      "ლეპტოპის მდგომარეობა": e.target.value,
+                      laptop_state: e.target.value,
                     })
                   }
                 >

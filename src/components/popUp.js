@@ -11,8 +11,9 @@ import {
 } from "@chakra-ui/react";
 
 import popupIcon from "../assets/popupIcon.png";
-
+import { useNavigate } from "react-router";
 export default function BackdropExample({ open, close }) {
+  const navigate = useNavigate();
   const OverlayOne = () => <ModalOverlay bg="#4A4A4A" />;
 
   return (
@@ -35,11 +36,10 @@ export default function BackdropExample({ open, close }) {
           <ModalFooter mx="auto">
             <Flex flexDirection="column">
               <Button
-                as="a"
-                href="sia"
                 backgroundColor="#62A1EB"
                 color="#fff"
                 mb={["38px", "28px"]}
+                onClick={() => navigate("/sia")}
               >
                 სიაში გადაყვანა
               </Button>
@@ -50,8 +50,7 @@ export default function BackdropExample({ open, close }) {
                 fontSize="20px"
                 mb={["70px", "44px"]}
                 cursor="pointer"
-                as="a"
-                href="/"
+                onClick={() => navigate("/")}
               >
                 მთავარი
               </Text>

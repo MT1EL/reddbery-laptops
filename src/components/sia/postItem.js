@@ -6,8 +6,8 @@ function PostItem({ item }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleClick = async () => {
-    dispatch({ type: "SETCURRENTPOST", payload: { item } });
-    navigate("/Singlepost");
+    // dispatch({ type: "SETCURRENTPOST", payload: { item } });
+    navigate("/Singlepost", { state: { id: item.laptop.id } });
   };
   return (
     <Box
@@ -22,7 +22,7 @@ function PostItem({ item }) {
             h="178px"
             objectFit="cover"
             objectPosition="50%"
-            src={item.laptop.imageUrl}
+            src={`https://pcfy.redberryinternship.ge/${item.laptop.image}`}
             alt="laptop"
             borderRadius={"10px"}
           />
@@ -34,8 +34,10 @@ function PostItem({ item }) {
           flexDirection="column"
           py="8"
         >
-          <Text fontWeight="500">{item.user.სახელი}</Text>
-          <Text>{item.laptop.CPU}</Text>
+          <Text fontWeight="500">
+            {item.user.name + " " + item.user.surname}
+          </Text>
+          <Text>{item.laptop.name}</Text>
           <Link
             color="#4386A9"
             textDecoration="underline"

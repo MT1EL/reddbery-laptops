@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Box,
@@ -13,6 +13,13 @@ import {
 
 import error from "../../../assets/errorIcon.png";
 function SecondLayout({ formik }) {
+  const [cpus, setCpus] = useState();
+  useEffect(() => {
+    fetch(`https://pcfy.redberryinternship.ge/api/cpus`)
+      .then((res) => res.json())
+      .then((res) => setCpus(res))
+      .catch((e) => console.log(e));
+  }, []);
   return (
     <Box
       display="flex"
@@ -31,20 +38,26 @@ function SecondLayout({ formik }) {
           fontWeight="500"
           w={["100%", "220px"]}
           my="4"
-          name="CPU"
-          value={formik.values.CPU}
+          name="laptop_cpu"
+          value={formik.values.laptop_cpu}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           focusBorderColor={
-            formik.touched.CPU && formik.errors.CPU ? "#E52F2F" : "#98c7e6"
+            formik.touched.laptop_cpu && formik.errors.laptop_cpu
+              ? "#E52F2F"
+              : "#98c7e6"
           }
           borderColor={
-            formik.touched.CPU && formik.errors.CPU ? "#E52F2F" : "#98c7e6"
+            formik.touched.laptop_cpu && formik.errors.laptop_cpu
+              ? "#E52F2F"
+              : "#98c7e6"
           }
         >
-          <option value="Intel Core">Intel Core</option>
-          <option value="AMD Ryzen">AMD Ryzen</option>
-          <option value="Apple M1">Apple M1</option>
+          {cpus?.data.map((option) => (
+            <option value={option.name} key={option.id}>
+              {option.name}
+            </option>
+          ))}
         </Select>
       </Box>
       <Box w={["100%", "220px"]}>
@@ -52,8 +65,8 @@ function SecondLayout({ formik }) {
           fontWeight="500"
           fontSize="18px"
           color={
-            formik.touched["CPU-ს ბირთვი"] &&
-            formik.errors["CPU-ს ბირთვი"] &&
+            formik.touched.laptop_cpu_cores &&
+            formik.errors.laptop_cpu_cores &&
             "#E52F2F"
           }
         >
@@ -64,28 +77,28 @@ function SecondLayout({ formik }) {
           placeholder="14"
           w={["100%", "220px"]}
           outlineColor={
-            formik.touched["CPU-ს ბირთვი"] && formik.errors["CPU-ს ბირთვი"]
+            formik.touched.laptop_cpu_cores && formik.errors.laptop_cpu_cores
               ? "#E52F2F"
               : "#98c7e6"
           }
           focusBorderColor="transparent"
           border="none"
           my="5px"
-          name="CPU-ს ბირთვი"
-          id="CPU-ს ბირთვი"
+          name="laptop_cpu_cores"
+          id="laptop_cpu_cores"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         <Text
           fontSize="14px"
           color={
-            formik.touched["CPU-ს ბირთვი"] &&
-            formik.errors["CPU-ს ბირთვი"] &&
+            formik.touched.laptop_cpu_cores &&
+            formik.errors.laptop_cpu_cores &&
             "#E52F2F"
           }
         >
-          {formik.errors["CPU-ს ბირთვი"]
-            ? formik.errors["CPU-ს ბირთვი"]
+          {formik.errors.laptop_cpu_cores
+            ? formik.errors.laptop_cpu_cores
             : "მხოლოდ ციფრები"}
         </Text>
       </Box>
@@ -94,8 +107,8 @@ function SecondLayout({ formik }) {
           fontWeight="500"
           fontSize="18px"
           color={
-            formik.touched["CPU-ს ნაკადი"] &&
-            formik.errors["CPU-ს ნაკადი"] &&
+            formik.touched.laptop_cpu_threads &&
+            formik.errors.laptop_cpu_threads &&
             "#E52F2F"
           }
         >
@@ -106,28 +119,29 @@ function SecondLayout({ formik }) {
           placeholder="365"
           w={["100%", "220px"]}
           outlineColor={
-            formik.touched["CPU-ს ნაკადი"] && formik.errors["CPU-ს ნაკადი"]
+            formik.touched.laptop_cpu_threads &&
+            formik.errors.laptop_cpu_threads
               ? "#E52F2F"
               : "#98c7e6"
           }
           focusBorderColor="transparent"
           border="none"
           my="5px"
-          name="CPU-ს ნაკადი"
-          id="CPU-ს ნაკადი"
+          name="laptop_cpu_threads"
+          id="laptop_cpu_threads"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         <Text
           fontSize="14px"
           color={
-            formik.touched["CPU-ს ნაკადი"] &&
-            formik.errors["CPU-ს ნაკადი"] &&
+            formik.touched.laptop_cpu_threads &&
+            formik.errors.laptop_cpu_threads &&
             "#E52F2F"
           }
         >
-          {formik.errors["CPU-ს ნაკადი"]
-            ? formik.errors["CPU-ს ნაკადი"]
+          {formik.errors.laptop_cpu_threads
+            ? formik.errors.laptop_cpu_threads
             : "მხოლოდ ციფრები"}
         </Text>
       </Box>
@@ -143,7 +157,9 @@ function SecondLayout({ formik }) {
           <Text
             fontWeight="500"
             fontSize="18px"
-            color={formik.touched.RAM && formik.errors.RAM && "#E52F2F"}
+            color={
+              formik.touched.laptop_ram && formik.errors.laptop_ram && "#E52F2F"
+            }
           >
             ლეპტოპის RAM (GB)
           </Text>
@@ -152,22 +168,26 @@ function SecondLayout({ formik }) {
             placeholder="16"
             w={["100%", "min(370px, 100%)"]}
             outlineColor={
-              formik.touched.RAM && formik.errors.RAM ? "#E52F2F" : "#98c7e6"
+              formik.touched.laptop_ram && formik.errors.laptop_ram
+                ? "#E52F2F"
+                : "#98c7e6"
             }
             focusBorderColor="transparent"
             border="none"
             my="5px"
-            name="RAM"
-            id="RAM"
+            name="laptop_ram"
+            id="laptop_ram"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           <Text
             fontSize="14px"
-            color={formik.touched.RAM && formik.errors.RAM && "#E52F2F"}
+            color={
+              formik.touched.laptop_ram && formik.errors.laptop_ram && "#E52F2F"
+            }
           >
-            {formik.errors.RAM
-              ? formik.errors.RAM
+            {formik.errors.laptop_ram
+              ? formik.errors.laptop_ram
               : "ლათინური ასოები, ციფრები, !@#$%^&*()_+= "}
           </Text>
         </Box>
@@ -182,8 +202,8 @@ function SecondLayout({ formik }) {
               fontWeight="500"
               fontSize="18px"
               color={
-                formik.errors["მეხსიერების ტიპი"] &&
-                formik.touched["მეხსიერების ტიპი"] &&
+                formik.errors.laptop_hard_drive_type &&
+                formik.touched.laptop_hard_drive_type &&
                 "#E52F2F"
               }
             >
@@ -195,8 +215,8 @@ function SecondLayout({ formik }) {
               src={error}
               alt="error"
               display={
-                formik.errors["მეხსიერების ტიპი"] &&
-                formik.touched["მეხსიერების ტიპი"]
+                formik.errors.laptop_hard_drive_type &&
+                formik.touched.laptop_hard_drive_type
                   ? "block"
                   : "none"
               }
@@ -211,8 +231,8 @@ function SecondLayout({ formik }) {
           >
             <RadioGroup
               w="100%"
-              name="მეხსიერების ტიპი"
-              id="მეხსიერების ტიპი"
+              name="laptop_hard_drive_type"
+              id="laptop_hard_drive_type"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             >
@@ -226,7 +246,7 @@ function SecondLayout({ formik }) {
                   onChange={(e) =>
                     formik.setValues({
                       ...formik.values,
-                      "მეხსიერების ტიპი": e.target.value,
+                      laptop_hard_drive_type: e.target.value,
                     })
                   }
                 >
@@ -238,7 +258,7 @@ function SecondLayout({ formik }) {
                   onChange={(e) =>
                     formik.setValues({
                       ...formik.values,
-                      "მეხსიერების ტიპი": e.target.value,
+                      laptop_hard_drive_type: e.target.value,
                     })
                   }
                 >

@@ -1,10 +1,12 @@
 const initialState = {
   user: {
-    სახელი: "",
-    თიმი: "",
-    პოზიცია: "",
-    მეილი: "",
-    "ტელ. ნომერი": "",
+    name: "",
+    surname: "",
+    team_id: "",
+    position_id: "",
+    email: "",
+    phone_number: "",
+    token: "",
   },
 };
 
@@ -14,11 +16,13 @@ export default function postUserReducer(state = initialState, action) {
       return {
         ...state,
         user: {
-          სახელი: action.payload.user?.name,
-          თიმი: action.payload.user?.team,
-          პოზიცია: action.payload.user?.position,
-          მეილი: action.payload.user?.mail,
-          "ტელ. ნომერი": action.payload.user?.number,
+          name: action.payload.user?.name,
+          surname: action.payload.user?.surname,
+          team_id: action.payload.user?.team,
+          position_id: +action.payload.user?.position_id,
+          email: action.payload.user?.email,
+          phone_number: action.payload.user?.number,
+          token: action.payload.user?.token,
         },
       };
     }
