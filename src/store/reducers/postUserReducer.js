@@ -22,7 +22,6 @@ export default function postUserReducer(state = initialState, action) {
           position_id: +action.payload.user?.position_id,
           email: action.payload.user?.email,
           phone_number: action.payload.user?.number,
-          token: action.payload.user?.token,
         },
       };
     }
