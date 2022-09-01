@@ -6,7 +6,7 @@ const initialState = {
     position_id: "",
     email: "",
     phone_number: "",
-    token: process.env.TOKEN,
+    token: process.env.REACT_APP_TOKEN,
   },
 };
 
