@@ -17,7 +17,6 @@ function Sia() {
       .then((res) => setData(res.data))
       .catch((e) => console.log(e));
   }, []);
-
   return (
     <Box>
       <SiaHeader title="ჩანაწერების სია" />
