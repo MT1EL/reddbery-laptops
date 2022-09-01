@@ -3,11 +3,19 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 
 import arrow from "../../assets/backIcon.png";
 import circle from "../../assets/backIconCircle.png";
+import {useNavigate} from 'react-router-dom'
 function SiaHeader({ title }) {
+  const navigate = useNavigate()
+  const route;
+  if(title === 'ჩანაწერების სია'){
+    route = '/'
+  }else{
+    route = '/sia'
+  }
   return (
     <Box>
       <Flex justifyContent="space-between" alignItems="center" py="8" px="6">
-        <Image src={arrow} alt="go back" display={["block", "none"]} />
+        <Image src={arrow} alt="go back" display={["block", "none"]} onClick={() => navigate(route)} />
         <Box
           position="relative"
           display={["none", "block"]}
