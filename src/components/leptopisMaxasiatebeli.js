@@ -65,9 +65,12 @@ function LeptopisMaxasiatebeli() {
         },
       })
         .then((res) => onOpen())
-        .catch((res) =>
-          setError("wrong laptop image format. valid formats(.jpeg, .jpg, png)")
-        );
+        .catch((res) => {
+          console.log(res);
+          setError(
+            "wrong laptop image format. valid formats(.jpeg, .jpg, png)"
+          );
+        });
     },
   });
 
