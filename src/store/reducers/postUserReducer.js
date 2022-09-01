@@ -14,14 +14,15 @@ export default function postUserReducer(state = initialState, action) {
   switch (action.type) {
     case "POSTUSER": {
       return {
+        ...state,
         user: {
-          ...state,
           name: action.payload.user?.name,
           surname: action.payload.user?.surname,
           team_id: action.payload.user?.team,
           position_id: +action.payload.user?.position_id,
           email: action.payload.user?.email,
           phone_number: action.payload.user?.number,
+          token: process.env.REACT_APP_TOKEN,
         },
       };
     }
