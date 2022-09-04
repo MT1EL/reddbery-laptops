@@ -19,7 +19,7 @@ export default function postUserReducer(state = initialState, action) {
           name: action.payload.user?.name,
           surname: action.payload.user?.surname,
           team_id: action.payload.user?.team,
-          position_id: +action.payload.user?.position_id,
+          position_id: action.payload.user?.position,
           email: action.payload.user?.email,
           phone_number: action.payload.user?.number,
           token: process.env.REACT_APP_TOKEN,

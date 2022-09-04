@@ -23,7 +23,6 @@ function SinglePost() {
       })
       .catch((e) => console.log(e));
   }, []);
-  console.log(state);
   if (!state) {
     return <Text>Loading</Text>;
   }

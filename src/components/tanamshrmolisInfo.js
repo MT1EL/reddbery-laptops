@@ -3,40 +3,57 @@ import { Box, Select, Button, Img } from "@chakra-ui/react";
 import CustomInput from "./shared/input";
 import CustomSelect from "./shared/select";
 import logo from "../assets/icon-logo.png";
-import getLanguage from "../hooks/getLanguage";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import Header from "./shared/header";
 import { api } from "../api";
+import store from "../store";
 function TanamshrmolisInfo() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = store.getState().postUserReducer.user;
 
   const [teamData, setTeamData] = useState();
   const [posData, setPosData] = useState();
+
   const formik = useFormik({
     initialValues: {
-      name: "",
-      surname: "",
-      team: "",
-      position_id: "",
-      email: "",
-      number: "",
+      name: user.name,
+      surname: user.surname,
+      team: user.team_id,
+      position: user.position_id,
+      email: user.email,
+      number: user.phone_number,
     },
 
     validationSchema: yup.object({
-      name: yup.string().required("მინიმუმ 2 სიმბოლო, ქართული ასოები"),
-      surname: yup.string().required("მინიმუმ 2 სიმბოლო, ქართული ასოები"),
+      name: yup
+        .string()
+        .min(2, "მინიმუმ 2 სიმბოლო, ქართული ასოები")
+        .required("მინიმუმ 2 სიმბოლო, ქართული ასოები")
+        .matches(/[ა-ჰ]/g, "გამოიყენე ქართული ასოები"),
+      surname: yup
+        .string()
+        .min(2, "მინიმუმ 2 სიმბოლო, ქართული ასოები")
+        .required("მინიმუმ 2 სიმბოლო, ქართული ასოები")
+        .matches(/[ა-ჰ]/g, "გამოიყენე ქართული ასოები"),
       team: yup.string().required("required"),
-      position_id: yup.number().required("required"),
-      email: yup.string().required("უნდა მთავრდებოდეს @redberry.ge-ით"),
+      position: yup.string().required("required"),
+      email: yup
+        .string()
+        .email()
+        .required()
+        .matches(/@redberry.ge/g, "უნდა მთავრდებოდეს @redberry.ge-ით"),
       number: yup
-        .number("")
-        .min(17, "უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს")
-        .required("ქართული მობ-ნომრის ფორმატი"),
+        .string()
+        .min(13, "უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს")
+        .max(13, "უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს")
+        .required("უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს")
+        .matches(/\S/g, "უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს"),
     }),
+    // .test(/\S/g, "არასწორი ფორმატი")
     onSubmit: async (values) => {
       dispatch({
         type: "POSTUSER",
@@ -44,8 +61,8 @@ function TanamshrmolisInfo() {
           user: {
             name: values.name,
             surname: values.surname,
-            team: JSON.parse(values.team).id,
-            position_id: values.position_id,
+            team: values.team,
+            position: values.position,
             email: values.email,
             number: values.number,
           },
@@ -53,60 +70,7 @@ function TanamshrmolisInfo() {
       });
       navigate("/leptopis-maxasiateblebi");
     },
-
-    validate: (values) => {
-      let errors = {};
-
-      if (
-        getLanguage(values.name).length === 1 &&
-        getLanguage(values.name)[0] !== "Georgian"
-      ) {
-        errors.name = "გამოიყენე ქართული ასოები";
-      } else {
-        if (values.name.length < 2) {
-          errors.name = "მინიმუმ 2 სიმბოლო";
-        }
-      }
-
-      if (
-        getLanguage(values.surname).length === 1 &&
-        getLanguage(values.surname)[0] !== "Georgian"
-      ) {
-        errors.surname = "გამოიყენე ქართული ასოები";
-      } else {
-        if (values.surname.length <= 1) {
-          errors.surname = "მინიმუმ 2 სიმბოლო";
-        }
-      }
-
-      if (!formik.values.team) {
-        errors.team = "required";
-      }
-
-      if (
-        !formik.values.position_id &&
-        typeof formik.values.position_id !== "number"
-      ) {
-        errors.position_id = "required";
-      }
-
-      const email = formik.values.email;
-      const startingIndex = email.length - 12;
-      let redberry = email.slice(startingIndex);
-
-      if (redberry !== "@redberry.ge") {
-        errors.email = "უნდა მთავრდებოდეს @redberry.ge-ით";
-      }
-      let number = formik.values.number;
-      const numberValidation = number.match(/\+995/g);
-      if (numberValidation === null || /\s/.test(number) === true) {
-        errors.number = "არასწორი ფორმატი";
-      }
-
-      return errors;
-    },
   });
-
   useEffect(() => {
     fetch(`${api}/teams`)
       .then((res) => res.json())
@@ -121,7 +85,6 @@ function TanamshrmolisInfo() {
       })
       .catch((e) => console.log(e));
   }, []);
-
   return (
     <Box>
       <Header title="თანამშრომლის ინფო" pageNumber={"1"} />
@@ -164,19 +127,28 @@ function TanamshrmolisInfo() {
           </Box>
 
           <Select
-            variant="filled"
+            variant={"filled"}
+            name="team"
             placeholder={"თიმი"}
-            name={"team"}
             value={formik.values.team}
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              dispatch({
+                type: "POSTUSER",
+                payload: {
+                  user: {
+                    ...formik.values,
+                    team: e.target.value,
+                  },
+                },
+              });
+            }}
             onBlur={formik.handleBlur}
             my="4"
             focusBorderColor={
-              formik.touched.team && formik.errors.team ? "#E52F2F" : "#98c7e6"
+              formik.touched.team && formik.errors.team && "#E52F2F"
             }
-            borderColor={
-              formik.touched.team && formik.errors.team ? "#E52F2F" : "#98c7e6"
-            }
+            borderColor={formik.touched.team && formik.errors.team && "#E52F2F"}
           >
             {teamData?.data?.map((option) => (
               <option value={JSON.stringify(option)} key={option.id}>
@@ -186,7 +158,7 @@ function TanamshrmolisInfo() {
           </Select>
 
           <CustomSelect
-            name="position_id"
+            name="position"
             placeholder="პოზიცია"
             formik={formik}
             data={posData}

@@ -4,8 +4,9 @@ import { Box, Img, Button } from "@chakra-ui/react";
 import landingPc from "../assets/landing-pc.png";
 import landingMobile from "../assets/landing-mobile.png";
 import logo from "../assets/text-logo.png";
-
+import useClearData from "../hooks/clearData";
 function LandingPage() {
+  useClearData();
   return (
     <Box
       display="flex"
@@ -36,19 +37,23 @@ function LandingPage() {
           size="xl"
           as="a"
           href="/tanamshromeliInfo"
+          fontWeight="500"
+          fontSize="20px"
         >
-          ჩანაწერის დამატება
+          ᲩᲐᲜᲐᲬᲔᲠᲘᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ
         </Button>
         <Button
           color="#fff"
           backgroundColor="#62A1EB"
           height="60px"
           borderRadius="8px"
+          fontWeight="500"
           size="xl"
           as="a"
           href="/sia"
+          fontSize="20px"
         >
-          ჩანაწერის სია
+          ᲩᲐᲜᲐᲬᲔᲠᲔᲑᲘᲡ ᲡᲘᲐ
         </Button>
       </Box>
     </Box>

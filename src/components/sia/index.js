@@ -5,18 +5,20 @@ import store from "../../store";
 import PostItem from "./postItem";
 import { apiCall } from "../../hooks/apiCall";
 import { api } from "../../api";
+import useClearData from "../../hooks/clearData";
 function Sia() {
-  const state = store.getState();
   const [data, setData] = useState();
+  useClearData();
   useEffect(() => {
     apiCall("get", `${api}/laptops`, {
       params: {
-        token: state.postUserReducer.user.token,
+        token: process.env.REACT_APP_TOKEN,
       },
     })
       .then((res) => setData(res.data))
       .catch((e) => console.log(e));
   }, []);
+
   return (
     <Box>
       <SiaHeader title="ჩანაწერების სია" />
@@ -24,8 +26,8 @@ function Sia() {
         gap={["25px"]}
         justifyItems="center"
         alignContent="center"
-        minChildWidth="400px"
-        w="min(100%, 1160px)"
+        minChildWidth={["220px", "400px"]}
+        w="min(90%, 1160px)"
         mx="auto"
       >
         {data
