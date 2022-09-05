@@ -11,10 +11,10 @@ import {
 } from "@chakra-ui/react";
 
 import error from "../../assets/errorIcon.png";
-import { useDispatch } from "react-redux";
+import { useFormikContext } from "formik";
 
-function Footer({ formik }) {
-  const dispatch = useDispatch();
+function Footer() {
+  const formik = useFormikContext();
   return (
     <>
       <Box
@@ -40,18 +40,7 @@ function Footer({ formik }) {
             id="laptop_purchase_date"
             value={formik.values.laptop_purchase_date}
             onChange={formik.handleChange}
-            onBlur={(e) => {
-              formik.handleBlur(e);
-              dispatch({
-                type: "POSTLAPTOP",
-                payload: {
-                  laptop: {
-                    ...formik.values,
-                    laptop_purchase_date: e.target.value,
-                  },
-                },
-              });
-            }}
+            onBlur={formik.handleBlur}
           />
         </Box>
 
@@ -79,15 +68,7 @@ function Footer({ formik }) {
             id="laptop_price"
             value={formik.values.laptop_price}
             onChange={formik.handleChange}
-            onBlur={(e) => {
-              formik.handleBlur(e);
-              dispatch({
-                type: "POSTLAPTOP",
-                payload: {
-                  laptop: { ...formik.values, laptop_price: e.target.value },
-                },
-              });
-            }}
+            onBlur={formik.handleBlur}
           />
           <Text
             fontSize="14px"
@@ -146,24 +127,13 @@ function Footer({ formik }) {
               w="100%"
               name="laptop_state"
               value={formik.values.laptop_state}
-              onBlur={(e) => {
-                formik.handleBlur(e);
-              }}
+              onBlur={formik.handleBlur}
             >
               <Box display="flex" justifyContent="space-between">
                 <Radio
                   value="new"
                   name="laptop_state"
                   onChange={(e) => {
-                    dispatch({
-                      type: "POSTLAPTOP",
-                      payload: {
-                        laptop: {
-                          ...formik.values,
-                          laptop_state: e.target.value,
-                        },
-                      },
-                    });
                     formik.setValues({
                       ...formik.values,
                       laptop_state: e.target.value,
@@ -177,15 +147,6 @@ function Footer({ formik }) {
                   justifySelf="flex-end"
                   name="laptop_state"
                   onChange={(e) => {
-                    dispatch({
-                      type: "POSTLAPTOP",
-                      payload: {
-                        laptop: {
-                          ...formik.values,
-                          laptop_state: e.target.value,
-                        },
-                      },
-                    });
                     formik.setValues({
                       ...formik.values,
                       laptop_state: e.target.value,

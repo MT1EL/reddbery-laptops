@@ -12,10 +12,11 @@ import {
 } from "@chakra-ui/react";
 
 import error from "../../assets/errorIcon.png";
-import { useDispatch } from "react-redux";
-function SecondLayout({ formik }) {
+import { useFormikContext } from "formik";
+
+function SecondLayout() {
   const [cpus, setCpus] = useState();
-  const dispatch = useDispatch();
+  const formik = useFormikContext();
   useEffect(() => {
     fetch(`https://pcfy.redberryinternship.ge/api/cpus`)
       .then((res) => res.json())
@@ -43,15 +44,7 @@ function SecondLayout({ formik }) {
           name="laptop_cpu"
           value={formik.values.laptop_cpu}
           onChange={formik.handleChange}
-          onBlur={(e) => {
-            formik.handleBlur(e);
-            dispatch({
-              type: "POSTLAPTOP",
-              payload: {
-                laptop: { ...formik.values, laptop_cpu: e.target.value },
-              },
-            });
-          }}
+          onBlur={formik.handleBlur}
           focusBorderColor={
             formik.touched.laptop_cpu && formik.errors.laptop_cpu
               ? "#E52F2F"
@@ -98,15 +91,7 @@ function SecondLayout({ formik }) {
           id="laptop_cpu_cores"
           value={formik.values.laptop_cpu_cores}
           onChange={formik.handleChange}
-          onBlur={(e) => {
-            formik.handleBlur(e);
-            dispatch({
-              type: "POSTLAPTOP",
-              payload: {
-                laptop: { ...formik.values, laptop_cpu_cores: e.target.value },
-              },
-            });
-          }}
+          onBlur={formik.handleBlur}
         />
         <Text
           fontSize="14px"
@@ -150,18 +135,7 @@ function SecondLayout({ formik }) {
           id="laptop_cpu_threads"
           value={formik.values.laptop_cpu_threads}
           onChange={formik.handleChange}
-          onBlur={(e) => {
-            formik.handleBlur(e);
-            dispatch({
-              type: "POSTLAPTOP",
-              payload: {
-                laptop: {
-                  ...formik.values,
-                  laptop_cpu_threads: e.target.value,
-                },
-              },
-            });
-          }}
+          onBlur={formik.handleBlur}
         />
         <Text
           fontSize="14px"
@@ -210,15 +184,7 @@ function SecondLayout({ formik }) {
             id="laptop_ram"
             value={formik.values.laptop_ram}
             onChange={formik.handleChange}
-            onBlur={(e) => {
-              formik.handleBlur(e);
-              dispatch({
-                type: "POSTLAPTOP",
-                payload: {
-                  laptop: { ...formik.values, laptop_ram: e.target.value },
-                },
-              });
-            }}
+            onBlur={formik.handleBlur}
           />
           <Text
             fontSize="14px"
@@ -275,18 +241,7 @@ function SecondLayout({ formik }) {
               id="laptop_hard_drive_type"
               value={formik.values.laptop_hard_drive_type}
               onChange={formik.handleChange}
-              onBlur={(e) => {
-                formik.handleBlur(e);
-                dispatch({
-                  type: "POSTLAPTOP",
-                  payload: {
-                    laptop: {
-                      ...formik.values,
-                      laptop_hard_drive_type: e.target.value,
-                    },
-                  },
-                });
-              }}
+              onBlur={formik.handleBlur}
             >
               <Box
                 // direction="row"

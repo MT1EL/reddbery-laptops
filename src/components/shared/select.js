@@ -1,26 +1,15 @@
 import React from "react";
 import { Select } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
-function CustomSelect({ name, placeholder, formik, data, w }) {
-  const dispatch = useDispatch();
+import { useFormikContext } from "formik";
+function CustomSelect({ name, placeholder, data, w }) {
+  const formik = useFormikContext();
   return (
     <Select
       variant={"filled"}
-      name="position"
+      name={name}
       placeholder={placeholder}
-      value={formik.values.position}
-      onChange={(e) => {
-        formik.handleChange(e);
-        dispatch({
-          type: "POSTUSER",
-          payload: {
-            user: {
-              ...formik.values,
-              position: e.target.value,
-            },
-          },
-        });
-      }}
+      value={formik.values[name]}
+      onChange={formik.handleChange}
       onBlur={formik.handleBlur}
       my="4"
       focusBorderColor={
@@ -29,15 +18,21 @@ function CustomSelect({ name, placeholder, formik, data, w }) {
       borderColor={formik.touched[name] && formik.errors[name] && "#E52F2F"}
       width={w && w}
     >
-      {data?.data?.map(
-        (option) =>
-          formik.values.team &&
-          option.team_id === JSON.parse(formik.values.team).id && (
+      {data?.data?.length !== 5
+        ? data?.data?.map(
+            (option) =>
+              formik.values.team &&
+              option.team_id === JSON.parse(formik.values.team).id && (
+                <option key={option.id} value={JSON.stringify(option)}>
+                  {option.name}
+                </option>
+              )
+          )
+        : data?.data?.map((option) => (
             <option key={option.id} value={JSON.stringify(option)}>
               {option.name}
             </option>
-          )
-      )}
+          ))}
     </Select>
   );
 }

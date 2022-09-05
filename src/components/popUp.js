@@ -12,11 +12,8 @@ import {
 
 import popupIcon from "../assets/popupIcon.png";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 export default function BackdropExample({ open, close }) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const OverlayOne = () => <ModalOverlay bg="#4A4A4A" />;
 
   return (

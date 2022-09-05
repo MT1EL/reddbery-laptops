@@ -5,8 +5,11 @@ import camera from "../../assets/camera.png";
 import Dropzone from "react-dropzone";
 
 import error from "../../assets/errorIcon.png";
-function DropComponent({ formik }) {
+import { useFormikContext } from "formik";
+function DropComponent() {
   const [url, setUrl] = useState(null);
+
+  const formik = useFormikContext();
   const onDrop = (acceptedFiles) => {
     const localImageUrl = window.URL.createObjectURL(acceptedFiles[0]);
     setUrl(localImageUrl);
@@ -18,7 +21,7 @@ function DropComponent({ formik }) {
         <Box
           {...getRootProps()}
           w={
-            formik.values.laptop_image
+            formik.values.laptop_image?.size
               ? "fit-content"
               : ["100%", "min(90%, 878px)"]
           }

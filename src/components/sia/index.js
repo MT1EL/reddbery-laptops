@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import SiaHeader from "./header";
-import store from "../../store";
 import PostItem from "./postItem";
 import { apiCall } from "../../hooks/apiCall";
 import { api } from "../../api";
-import useClearData from "../../hooks/clearData";
 function Sia() {
   const [data, setData] = useState();
-  useClearData();
   useEffect(() => {
     apiCall("get", `${api}/laptops`, {
       params: {

@@ -4,9 +4,9 @@ import { Box, Img, Button } from "@chakra-ui/react";
 import landingPc from "../assets/landing-pc.png";
 import landingMobile from "../assets/landing-mobile.png";
 import logo from "../assets/text-logo.png";
-import useClearData from "../hooks/clearData";
+// import useClearData from "../hooks/clearData";
 function LandingPage() {
-  useClearData();
+  // useClearData();
   return (
     <Box
       display="flex"

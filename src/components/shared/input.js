@@ -5,17 +5,9 @@ import {
   FormHelperText,
   Input,
 } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
-function CustomInput({
-  formlabel,
-  inputname,
-  placeholder,
-  formik,
-  type,
-  helperText,
-}) {
-  const dispatch = useDispatch();
-
+import { useFormikContext } from "formik";
+function CustomInput({ formlabel, inputname, placeholder, type, helperText }) {
+  const formik = useFormikContext();
   return (
     <FormControl>
       <FormLabel
@@ -33,18 +25,7 @@ function CustomInput({
         name={inputname}
         placeholder={placeholder}
         onChange={formik.handleChange}
-        onBlur={(e) => {
-          formik.handleBlur(e);
-          dispatch({
-            type: "POSTUSER",
-            payload: {
-              user: {
-                ...formik.values,
-                inputname: e.target.value,
-              },
-            },
-          });
-        }}
+        onBlur={formik.handleBlur}
         w={["100%", type === "text" ? "370px" : "100%"]}
         outlineColor={
           formik.touched[inputname] && formik.errors[inputname]

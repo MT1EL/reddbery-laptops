@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Box, Input, Text, Select } from "@chakra-ui/react";
 import { api } from "../../api";
-import { useDispatch } from "react-redux";
-function FirstLayout({ formik }) {
+import { useFormikContext } from "formik";
+function FirstLayout() {
   const [brands, setBrands] = useState();
-  const dispatch = useDispatch();
+  const formik = useFormikContext();
   useEffect(() => {
     fetch(`${api}/brands`)
       .then((res) => res.json())
-      .then((res) => setBrands(res))
+      .then((res) => {
+        localStorage.setItem("brands", JSON.stringify(res));
+        setBrands(res);
+      })
       .catch((e) => console.log(e));
   }, []);
   return (
@@ -49,15 +52,7 @@ function FirstLayout({ formik }) {
             id="laptop_name"
             value={formik.values.laptop_name}
             onChange={formik.handleChange}
-            onBlur={(e) => {
-              formik.handleBlur(e);
-              dispatch({
-                type: "POSTLAPTOP",
-                payload: {
-                  laptop: { ...formik.values, laptop_name: e.target.value },
-                },
-              });
-            }}
+            onBlur={formik.handleBlur}
           />
           <Text
             fontSize="14px"
@@ -83,16 +78,7 @@ function FirstLayout({ formik }) {
             name="laptop_brand_id"
             value={formik.values.laptop_brand_id}
             onChange={formik.handleChange}
-            onBlur={(e) => {
-              formik.handleBlur(e);
-
-              dispatch({
-                type: "POSTLAPTOP",
-                payload: {
-                  laptop: { ...formik.values, laptop_brand_id: e.target.value },
-                },
-              });
-            }}
+            onBlur={formik.handleBlur}
             focusBorderColor={
               formik.touched.laptop_brand_id && formik.errors.laptop_brand_id
                 ? "#E52F2F"
