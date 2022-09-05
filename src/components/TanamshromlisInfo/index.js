@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Box, Select, Button, Img } from "@chakra-ui/react";
+import { Box, Button, Img } from "@chakra-ui/react";
 import CustomInput from "../shared/input";
 import CustomSelect from "../shared/select";
 import logo from "../../assets/icon-logo.png";
 import { Form, Formik } from "formik";
-import * as yup from "yup";
 import { useNavigate } from "react-router";
 import Header from "../shared/header";
 import { api } from "../../api";
 import { validation } from "./Formik/.";
 import { Persist } from "formik-persist";
-import { error } from "jquery";
 function TanamshrmolisInfo() {
   const navigate = useNavigate();
 

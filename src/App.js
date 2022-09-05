@@ -5,7 +5,6 @@ import TanamshrmolisInfo from "./components/TanamshromlisInfo";
 import Sia from "./components/sia/.";
 import LeptopisMaxasiatebeli from "./components/LaptopPage";
 import SinglePost from "./components/Singlepost";
-import { Formik, Form } from "formik";
 function App() {
   return (
     <Router>
