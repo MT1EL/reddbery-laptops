@@ -40,6 +40,8 @@ export default function BackdropExample({ open, close }) {
                 color="#fff"
                 mb={["38px", "28px"]}
                 onClick={() => navigate("/sia")}
+                // as="a"
+                // href="/sia"
               >
                 სიაში გადაყვანა
               </Button>

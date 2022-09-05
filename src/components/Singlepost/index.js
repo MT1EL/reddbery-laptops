@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Text } from "@chakra-ui/react";
-import store from "../../store";
+// import store from "../../store";
 import SiaHeader from "../sia/header";
 import { apiCall } from "../../hooks/apiCall";
 import { api } from "../../api";
@@ -10,12 +10,11 @@ import SecondLayout from "./secondLayout";
 import ThirdLayout from "./thirdLayout";
 function SinglePost() {
   const location = useLocation();
-  const reduxState = store.getState();
   const [state, setState] = useState();
   useEffect(() => {
     apiCall("get", `${api}/laptop/${location.state.id}`, {
       params: {
-        token: reduxState.postUserReducer.user.token,
+        token: process.env.REACT_APP_TOKEN,
       },
     })
       .then((res) => {
@@ -23,7 +22,6 @@ function SinglePost() {
       })
       .catch((e) => console.log(e));
   }, []);
-  console.log(state);
   if (!state) {
     return <Text>Loading</Text>;
   }
@@ -31,9 +29,9 @@ function SinglePost() {
     <Box>
       <SiaHeader title="ლეპტოპის ინფო" />
       <Box w={["90%", "min(1100px, 90%)"]} mx="auto">
-        <FirstLayout state={state} reduxState={reduxState} />
-        <SecondLayout state={state} reduxState={reduxState} />
-        <ThirdLayout state={state} reduxState={reduxState} />
+        <FirstLayout state={state} />
+        <SecondLayout state={state} />
+        <ThirdLayout state={state} />
       </Box>
     </Box>
   );

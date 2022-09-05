@@ -5,14 +5,9 @@ import {
   FormHelperText,
   Input,
 } from "@chakra-ui/react";
-function CustomInput({
-  formlabel,
-  inputname,
-  placeholder,
-  formik,
-  type,
-  helperText,
-}) {
+import { useFormikContext } from "formik";
+function CustomInput({ formlabel, inputname, placeholder, type, helperText }) {
+  const formik = useFormikContext();
   return (
     <FormControl>
       <FormLabel
@@ -25,7 +20,7 @@ function CustomInput({
         {formlabel}
       </FormLabel>
       <Input
-        value={formik.values.inputname}
+        value={formik.values[inputname]}
         type={type}
         name={inputname}
         placeholder={placeholder}

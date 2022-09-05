@@ -2,7 +2,9 @@ import React from "react";
 import { Box, Image, SimpleGrid, Text, Grid } from "@chakra-ui/react";
 import ValuesGrid from "./valuesGrid";
 
-function FirstLayout({ state, reduxState }) {
+function FirstLayout({ state }) {
+  const teams = JSON.parse(localStorage.getItem("teams"));
+  const positions = JSON.parse(localStorage.getItem("positions"));
   return (
     <>
       <SimpleGrid
@@ -43,7 +45,7 @@ function FirstLayout({ state, reduxState }) {
               თიმი:
             </Text>
             <Text fontWeight="400" color="#797979" fontSize="20px">
-              {reduxState.teamReducer.data.map(
+              {teams.data.map(
                 (item) => item.id === state.user.team_id && item.name
               )}
             </Text>
@@ -58,7 +60,7 @@ function FirstLayout({ state, reduxState }) {
               პოზიცია:
             </Text>
             <Text fontWeight="400" color="#797979" fontSize="20px">
-              {reduxState.positionReducer.data.map(
+              {positions.data.map(
                 (item) => item.id === state.user.position_id && item.name
               )}
             </Text>

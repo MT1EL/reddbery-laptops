@@ -16,7 +16,7 @@ function PostItem({ item }) {
         <Box p="2" alignSelf="center">
           <Image
             w="266px"
-            h="178px"
+            h={["109px", "178px"]}
             objectFit="cover"
             objectPosition="50%"
             src={`https://pcfy.redberryinternship.ge/${item.laptop.image}`}
@@ -29,7 +29,8 @@ function PostItem({ item }) {
           marginLeft="28px"
           justifyContent="space-around"
           flexDirection="column"
-          py="8"
+          h={["109px", "178px"]}
+          my="auto"
         >
           <Text fontWeight="500">
             {item.user.name + " " + item.user.surname}

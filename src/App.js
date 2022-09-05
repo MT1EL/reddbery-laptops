@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import LandingPage from "./components/landingPage";
-import TanamshrmolisInfo from "./components/tanamshrmolisInfo";
+import TanamshrmolisInfo from "./components/TanamshromlisInfo";
 import Sia from "./components/sia/.";
-import LeptopisMaxasiatebeli from "./components/leptopisMaxasiatebeli";
+import LeptopisMaxasiatebeli from "./components/LaptopPage";
 import SinglePost from "./components/Singlepost";
 function App() {
   return (

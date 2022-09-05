@@ -2,7 +2,10 @@ import React from "react";
 import { Box, Image, Text } from "@chakra-ui/react";
 import circle from "../../assets/backIconCircle.png";
 import arrow from "../../assets/backIcon.png";
+import { useNavigate } from "react-router";
 function Header({ title, pageNumber }) {
+  const navigate = useNavigate();
+  const route = pageNumber === "1" ? "/" : "/tanamshromeliInfo";
   return (
     <Box
       backgroundColor={["#fff", "#F6F6F6"]}
@@ -43,7 +46,13 @@ function Header({ title, pageNumber }) {
         pb="10px"
         backgroundColor="#f6f6f6"
       >
-        <Image src={arrow} alt="go back arrow" mt="-4" />
+        <Image
+          src={arrow}
+          alt="go back arrow"
+          mt="-4"
+          onClick={() => navigate(route)}
+        />
+
         <Box textAlign="center">
           <Text fontWeight="700" fontSize="16px">
             {title}
